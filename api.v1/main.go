@@ -42,7 +42,7 @@ func (s apiServer) requestHandler(w http.ResponseWriter, r *http.Request) {
 	traceID := trace.NewTraceID()
 	trace.Req(traceID, "www", "api.v1", "")
 	defer trace.Rep(traceID, "api.v1", "www", time.Now())
-	log.Printf("traceId=%s", traceID)
+	log.Printf("traceId=%s serviceId=%s", traceID, "api.v1")
 
 	// context and metadata
 	md := metadata.Pairs("traceID", traceID, "from", "api.v1")

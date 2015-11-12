@@ -18,18 +18,17 @@ const (
 	BEARER_SCHEMA string = "Bearer "
 )
 
-func NewAuthMiddleware(addr string) func(http.Handler) http.Handler {
-	authClient, err := auth.NewClient(addr)
+func NewAuthMiddleware(authServiceAddr string) func(http.Handler) http.Handler {
+	authClient, err := auth.NewClient(authServiceAddr)
 	if err != nil {
 		log.Fatal("AuthClient error:", err)
 	}
+
 	defer authClient.Close()
 
-	fn := func(h http.Handler) http.Handler {
+	return func(h http.Handler) http.Handler {
 		return authMiddleware{h, authClient}
 	}
-
-	return fn
 }
 
 type authMiddleware struct {
@@ -38,6 +37,7 @@ type authMiddleware struct {
 }
 
 func (b authMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	// get token from Authorization header
 	authToken, err := b.parseToken(r.Header.Get("Authorization"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusForbidden)
@@ -67,7 +67,7 @@ func (b authMiddleware) parseToken(auth_header string) (string, error) {
 
 	// Confirm the request is sending Basic Authentication credentials.
 	if !strings.HasPrefix(auth_header, BASIC_SCHEMA) && !strings.HasPrefix(auth_header, BEARER_SCHEMA) {
-		return "", errors.New("Auth type not supported")
+		return "", errors.New("Authorization requires Basic/Bearer scheme")
 	}
 
 	// Get the token from the request header
