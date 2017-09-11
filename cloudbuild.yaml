@@ -1,0 +1,32 @@
+steps:
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', '-ldflags', "'-w'", './cmd/api']
+  env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file', 'Dockerfile.api', '--tag=gcr.io/$PROJECT_ID/api', '.']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', '-ldflags', "'-w'", './cmd/geo']
+  env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file', 'Dockerfile.geo', '--tag=gcr.io/$PROJECT_ID/geo', '.']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', '-ldflags', "'-w'", './cmd/profile']
+  env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file', 'Dockerfile.profile', '--tag=gcr.io/$PROJECT_ID/profile', '.']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', '-ldflags', "'-w'", './cmd/rate']
+  env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file', 'Dockerfile.rate', '--tag=gcr.io/$PROJECT_ID/rate', '.']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', '-ldflags', "'-w'", './cmd/search']
+  env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file', 'Dockerfile.search', '--tag=gcr.io/$PROJECT_ID/search', '.']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', '-ldflags', "'-w'", './cmd/www']
+  env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file', 'Dockerfile.www', '--tag=gcr.io/$PROJECT_ID/www', '.']
+images: ['gcr.io/$PROJECT_ID/api', 'gcr.io/$PROJECT_ID/geo', 'gcr.io/$PROJECT_ID/profile', 'gcr.io/$PROJECT_ID/rate', 'gcr.io/$PROJECT_ID/search', 'gcr.io/$PROJECT_ID/www']

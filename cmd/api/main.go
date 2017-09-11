@@ -24,7 +24,7 @@ func main() {
 		profileClient: profile.NewProfileClient(mustDial(*profileAddr)),
 	}
 
-	http.HandleFunc("/", srv.searchHandler)
+	http.HandleFunc("/api", srv.searchHandler)
 	log.Fatal(http.ListenAndServe(":"+*port, nil))
 }
 

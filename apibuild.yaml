@@ -1,0 +1,7 @@
+steps:
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', '-ldflags', "'-w'", './cmd/api']
+  env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file', 'Dockerfile.api', '--tag=gcr.io/$PROJECT_ID/api', '.']
+images: ['gcr.io/$PROJECT_ID/api']

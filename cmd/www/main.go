@@ -51,7 +51,7 @@ const htmlBody = `
           infowindow.open(map);
         });
 
-        map.data.loadGeoJson('http://localhost:8080?inDate=2015-04-09&outDate=2015-04-10');
+        map.data.loadGeoJson('http://35.186.188.105/api?inDate=2015-04-09&outDate=2015-04-10');
       }
     </script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&callback=initMap" async defer></script>
