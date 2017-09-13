@@ -8,7 +8,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/harlow/go-micro-services/pb/rate"
+	"github.com/harlow/go-micro-services/pb/v1/rate"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )

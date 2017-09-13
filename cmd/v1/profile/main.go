@@ -8,7 +8,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/harlow/go-micro-services/pb/profile"
+	"github.com/harlow/go-micro-services/pb/v1/profile"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )

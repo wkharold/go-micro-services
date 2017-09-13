@@ -9,7 +9,7 @@ import (
 	"net"
 
 	"github.com/hailocab/go-geoindex"
-	"github.com/harlow/go-micro-services/pb/geo"
+	"github.com/harlow/go-micro-services/pb/v1/geo"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )

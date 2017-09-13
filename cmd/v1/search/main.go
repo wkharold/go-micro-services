@@ -6,9 +6,9 @@ import (
 	"log"
 	"net"
 
-	"github.com/harlow/go-micro-services/pb/geo"
-	"github.com/harlow/go-micro-services/pb/rate"
-	"github.com/harlow/go-micro-services/pb/search"
+	"github.com/harlow/go-micro-services/pb/v1/geo"
+	"github.com/harlow/go-micro-services/pb/v1/rate"
+	"github.com/harlow/go-micro-services/pb/v1/search"
 	context "golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
