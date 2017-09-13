@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net"
 
 	"github.com/hailocab/go-geoindex"
-	"github.com/harlow/go-micro-services/data"
 	"github.com/harlow/go-micro-services/pb/geo"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -63,7 +63,11 @@ func (s *server) getNearbyPoints(ctx context.Context, lat, lon float64) []geoind
 
 // newGeoIndex returns a geo index with points loaded
 func newGeoIndex(path string) *geoindex.ClusteringIndex {
-	file := data.MustAsset(path)
+	file, err := ioutil.ReadFile(path)
+	if err != nil {
+		log.Fatalf("cannot read: %s [%v]", path, err)
+		panic(err)
+	}
 
 	// unmarshal json points
 	var points []*point
@@ -93,7 +97,7 @@ func main() {
 	// grpc server
 	srv := grpc.NewServer()
 	geo.RegisterGeoServer(srv, &server{
-		index: newGeoIndex("data/geo.json"),
+		index: newGeoIndex("/data/geo.json"),
 	})
 	srv.Serve(lis)
 }

@@ -1,5 +1,6 @@
-FROM scratch
+FROM golang
 
 COPY gopath/bin/rate /rate
+COPY data/inventory.json /data/inventory.json
 
 ENTRYPOINT ["/rate"]

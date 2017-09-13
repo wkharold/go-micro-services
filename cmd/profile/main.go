@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net"
 
-	"github.com/harlow/go-micro-services/data"
 	"github.com/harlow/go-micro-services/pb/profile"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -28,7 +28,11 @@ func (s *server) GetProfiles(ctx context.Context, req *profile.Request) (*profil
 
 // loadProfiles loads hotel profiles from a JSON file.
 func loadProfiles(path string) map[string]*profile.Hotel {
-	file := data.MustAsset(path)
+	file, err := ioutil.ReadFile(path)
+	if err != nil {
+		log.Fatalf("cannot read: %s [%v]", path, err)
+		panic(err)
+	}
 
 	// unmarshal json profiles
 	hotels := []*profile.Hotel{}
@@ -57,7 +61,7 @@ func main() {
 	// grpc server with profiles endpoint
 	srv := grpc.NewServer()
 	profile.RegisterProfileServer(srv, &server{
-		hotels: loadProfiles("data/hotels.json"),
+		hotels: loadProfiles("/data/hotels.json"),
 	})
 	srv.Serve(lis)
 }

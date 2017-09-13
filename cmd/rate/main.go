@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net"
 
-	"github.com/harlow/go-micro-services/data"
 	"github.com/harlow/go-micro-services/pb/rate"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -41,7 +41,11 @@ func (s *server) GetRates(ctx context.Context, req *rate.Request) (*rate.Result,
 
 // loadRates loads rate codes from JSON file.
 func loadRateTable(path string) map[stay]*rate.RatePlan {
-	file := data.MustAsset(path)
+	file, err := ioutil.ReadFile(path)
+	if err != nil {
+		log.Fatalf("cannot read: %s [%v]", path, err)
+		panic(err)
+	}
 
 	rates := []*rate.RatePlan{}
 	if err := json.Unmarshal(file, &rates); err != nil {
@@ -75,7 +79,7 @@ func main() {
 	// grpc server
 	srv := grpc.NewServer()
 	rate.RegisterRateServer(srv, &server{
-		rateTable: loadRateTable("data/inventory.json"),
+		rateTable: loadRateTable("/data/inventory.json"),
 	})
 	srv.Serve(lis)
 }
