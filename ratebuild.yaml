@@ -1,0 +1,7 @@
+steps:
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', '-ldflags', "'-w'", './cmd/v2/rate']
+  env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file', 'Dockerfile.rate', '--tag=gcr.io/$PROJECT_ID/rate-v2', '.']
+images: ['gcr.io/$PROJECT_ID/rate-v2']

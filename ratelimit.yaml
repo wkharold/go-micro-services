@@ -4,5 +4,5 @@ rules:
     params:
       quotas:
       - descriptorName: RequestCount
-        maxAmount: 8
+        maxAmount: 4
         expiration: 1s

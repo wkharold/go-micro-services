@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: profile-v2
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: profile
+        version: v2
+    spec:
+      containers:
+      - name: profile-v2
+        image: gcr.io/wkh-istio-demo/profile-v2
+        ports:
+        - containerPort: 8080

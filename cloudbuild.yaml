@@ -29,4 +29,15 @@ steps:
   env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '--file', 'Dockerfile.www', '--tag=gcr.io/$PROJECT_ID/www-v1', '.']
-images: ['gcr.io/$PROJECT_ID/api-v1', 'gcr.io/$PROJECT_ID/geo-v1', 'gcr.io/$PROJECT_ID/profile-v1', 'gcr.io/$PROJECT_ID/rate-v1', 'gcr.io/$PROJECT_ID/search-v1', 'gcr.io/$PROJECT_ID/www-v1']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', '-ldflags', "'-w'", './cmd/v2/rate']
+  env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file', 'Dockerfile.rate', '--tag=gcr.io/$PROJECT_ID/rate-v2', '.']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', '-ldflags', "'-w'", './cmd/v2/profile']
+  env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file', 'Dockerfile.profile', '--tag=gcr.io/$PROJECT_ID/profile-v2', '.']
+
+images: ['gcr.io/$PROJECT_ID/api-v1', 'gcr.io/$PROJECT_ID/geo-v1', 'gcr.io/$PROJECT_ID/profile-v1', 'gcr.io/$PROJECT_ID/rate-v1', 'gcr.io/$PROJECT_ID/search-v1', 'gcr.io/$PROJECT_ID/www-v1', 'gcr.io/$PROJECT_ID/profile-v2', 'gcr.io/$PROJECT_ID/rate-v2']
