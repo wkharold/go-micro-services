@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: geo
-        image: gcr.io/wkh-istio-demo/geo
+        image: gcr.io/wkh-istio-demo/geo-v1
         ports:
         - containerPort: 8080
 ---
@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
       - name: profile
-        image: gcr.io/wkh-istio-demo/profile
+        image: gcr.io/wkh-istio-demo/profile-v1
         ports:
         - containerPort: 8080
 ---
@@ -74,7 +74,7 @@ spec:
     spec:
       containers:
       - name: rate
-        image: gcr.io/wkh-istio-demo/rate
+        image: gcr.io/wkh-istio-demo/rate-v1
         ports:
         - containerPort: 8080
 ---
@@ -105,7 +105,7 @@ spec:
     spec:
       containers:
       - name: search
-        image: gcr.io/wkh-istio-demo/search
+        image: gcr.io/wkh-istio-demo/search-v1
         ports:
         - containerPort: 8080
 ---
@@ -136,7 +136,7 @@ spec:
     spec:
       containers:
       - name: www
-        image: gcr.io/wkh-istio-demo/www
+        image: gcr.io/wkh-istio-demo/www-v1
         ports:
         - containerPort: 5000
 ---
@@ -167,7 +167,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: gcr.io/wkh-istio-demo/api
+        image: gcr.io/wkh-istio-demo/api-v1
         ports:
         - containerPort: 8080
 ---

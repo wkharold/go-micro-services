@@ -1,32 +1,32 @@
 steps:
 - name: 'gcr.io/cloud-builders/go'
-  args: ['install', '-ldflags', "'-w'", './cmd/api']
+  args: ['install', '-ldflags', "'-w'", './cmd/v1/api']
   env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--file', 'Dockerfile.api', '--tag=gcr.io/$PROJECT_ID/api', '.']
+  args: ['build', '--file', 'Dockerfile.api', '--tag=gcr.io/$PROJECT_ID/api-v1', '.']
 - name: 'gcr.io/cloud-builders/go'
-  args: ['install', '-ldflags', "'-w'", './cmd/geo']
+  args: ['install', '-ldflags', "'-w'", './cmd/v1/geo']
   env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--file', 'Dockerfile.geo', '--tag=gcr.io/$PROJECT_ID/geo', '.']
+  args: ['build', '--file', 'Dockerfile.geo', '--tag=gcr.io/$PROJECT_ID/geo-v1', '.']
 - name: 'gcr.io/cloud-builders/go'
-  args: ['install', '-ldflags', "'-w'", './cmd/profile']
+  args: ['install', '-ldflags', "'-w'", './cmd/v1/profile']
   env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--file', 'Dockerfile.profile', '--tag=gcr.io/$PROJECT_ID/profile', '.']
+  args: ['build', '--file', 'Dockerfile.profile', '--tag=gcr.io/$PROJECT_ID/profile-v1', '.']
 - name: 'gcr.io/cloud-builders/go'
-  args: ['install', '-ldflags', "'-w'", './cmd/rate']
+  args: ['install', '-ldflags', "'-w'", './cmd/v1/rate']
   env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--file', 'Dockerfile.rate', '--tag=gcr.io/$PROJECT_ID/rate', '.']
+  args: ['build', '--file', 'Dockerfile.rate', '--tag=gcr.io/$PROJECT_ID/rate-v1', '.']
 - name: 'gcr.io/cloud-builders/go'
-  args: ['install', '-ldflags', "'-w'", './cmd/search']
+  args: ['install', '-ldflags', "'-w'", './cmd/v1/search']
   env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--file', 'Dockerfile.search', '--tag=gcr.io/$PROJECT_ID/search', '.']
+  args: ['build', '--file', 'Dockerfile.search', '--tag=gcr.io/$PROJECT_ID/search-v1', '.']
 - name: 'gcr.io/cloud-builders/go'
-  args: ['install', '-ldflags', "'-w'", './cmd/www']
+  args: ['install', '-ldflags', "'-w'", './cmd/v1/www']
   env: ["PROJECT_ROOT=github.com/harlow/go-micro-services", "CGO_ENABLED=0", "GOOS=linux"]
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--file', 'Dockerfile.www', '--tag=gcr.io/$PROJECT_ID/www', '.']
-images: ['gcr.io/$PROJECT_ID/api', 'gcr.io/$PROJECT_ID/geo', 'gcr.io/$PROJECT_ID/profile', 'gcr.io/$PROJECT_ID/rate', 'gcr.io/$PROJECT_ID/search', 'gcr.io/$PROJECT_ID/www']
+  args: ['build', '--file', 'Dockerfile.www', '--tag=gcr.io/$PROJECT_ID/www-v1', '.']
+images: ['gcr.io/$PROJECT_ID/api-v1', 'gcr.io/$PROJECT_ID/geo-v1', 'gcr.io/$PROJECT_ID/profile-v1', 'gcr.io/$PROJECT_ID/rate-v1', 'gcr.io/$PROJECT_ID/search-v1', 'gcr.io/$PROJECT_ID/www-v1']
