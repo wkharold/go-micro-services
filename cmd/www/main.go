@@ -51,7 +51,7 @@ const htmlBody = `
           infowindow.open(map);
         });
 
-        map.data.loadGeoJson('http://35.186.187.157/api?inDate=2015-04-09&outDate=2015-04-10');
+        map.data.loadGeoJson('http://35.194.90.189/api?inDate=2015-04-09&outDate=2015-04-10');
       }
     </script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDCoNkb_Fea5Wyur5T_1Pya-SZLyOhInlg&sensor=false&callback=initMap" async defer></script>
