@@ -1,0 +1,13 @@
+type: route-rule
+name: rate-v2-to-profile-v2
+spec:
+  destination: profile.default.svc.cluster.local
+  precedence: 10
+  match:
+    source: rate.default.svc.cluster.local
+    sourceTags:
+      version: v2
+  route:
+  - tags:
+      version: v2
+    weight: 100

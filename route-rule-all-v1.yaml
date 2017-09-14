@@ -1,0 +1,44 @@
+type: route-rule
+name: api-default
+spec:
+  destination: api.default.svc.cluster.local
+  precedence: 1
+  route:
+  - tags:
+      version: v1
+---
+type: route-rule
+name: profile-default
+spec:
+  destination: profile.default.svc.cluster.local
+  precedence: 1
+  route:
+  - tags:
+      version: v1
+---
+type: route-rule
+name: search-default
+spec:
+  destination: search.default.svc.cluster.local
+  precedence: 1
+  route:
+  - tags:
+      version: v1
+---
+type: route-rule
+name: rate-default
+spec:
+  destination: rate.default.svc.cluster.local
+  precedence: 1
+  route:
+  - tags:
+      version: v1
+---
+type: route-rule
+name: geo-default
+spec:
+  destination: geo.default.svc.cluster.local
+  precedence: 1
+  route:
+  - tags:
+      version: v1

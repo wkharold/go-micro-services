@@ -1,0 +1,12 @@
+type: route-rule
+name: rate-v2-10
+spec:
+  destination: rate.default.svc.cluster.local
+  precedence: 5
+  route:
+  - tags:
+      version: v1
+    weight: 90
+  - tags:
+      version: v2
+    weight: 10

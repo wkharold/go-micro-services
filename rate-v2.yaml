@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: rate-v2
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rate
+        version: v2
+    spec:
+      containers:
+      - name: rate-v2
+        image: gcr.io/wkh-istio-demo/rate-v2
+        ports:
+        - containerPort: 8080
